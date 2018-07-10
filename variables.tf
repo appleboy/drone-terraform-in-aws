@@ -13,3 +13,8 @@ variable "aws_region" {
 variable "environment" {
   default = "staging"
 }
+
+# Route53 root zone
+variable "route53_zone" {
+  default = "test.com"
+}
