@@ -30,8 +30,8 @@ resource "aws_route53_record" "drone" {
   type    = "A"
 
   alias {
-    name                   = "${aws_alb.main.dns_name}"
-    zone_id                = "${aws_alb.main.zone_id}"
+    name                   = "${aws_alb.front.dns_name}"
+    zone_id                = "${aws_alb.front.zone_id}"
     evaluate_target_health = true
   }
 }

@@ -1,74 +1,5 @@
-resource "aws_security_group" "lb_sg" {
-  description = "controls access to the application ELB"
-
-  vpc_id = "${aws_vpc.drone.id}"
-  name   = "tf-ecs-lbsg"
-
-  ingress {
-    protocol    = "tcp"
-    from_port   = 80
-    to_port     = 80
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  egress {
-    from_port = 0
-    to_port   = 0
-    protocol  = "-1"
-
-    cidr_blocks = [
-      "0.0.0.0/0",
-    ]
-  }
-}
-
-resource "aws_security_group" "ecs_tasks" {
-  description = "controls direct access to application instances"
-  vpc_id      = "${aws_vpc.drone.id}"
-  name        = "ecs-task"
-
-  ingress {
-    protocol  = "tcp"
-    from_port = 22
-    to_port   = 22
-
-    cidr_blocks = [
-      "0.0.0.0/0",
-    ]
-  }
-
-  ingress {
-    protocol  = "tcp"
-    from_port = 8000
-    to_port   = 8000
-
-    security_groups = [
-      "${aws_security_group.lb_sg.id}",
-    ]
-  }
-
-  egress {
-    from_port = 0
-    to_port   = 0
-    protocol  = "-1"
-
-    cidr_blocks = [
-      "0.0.0.0/0",
-    ]
-  }
-}
-
 resource "aws_ecs_cluster" "drone" {
   name = "drone"
-}
-
-resource "aws_ebs_volume" "drone" {
-  availability_zone = "${var.aws_region}a"
-  size              = 10
-
-  tags {
-    Name = "drone"
-  }
 }
 
 resource "aws_cloudwatch_log_group" "drone_server" {
@@ -87,7 +18,6 @@ data "template_file" "task_definition" {
   template = "${file("${path.module}/task-definitions/service.json")}"
 
   vars {
-    volume                 = "${aws_ebs_volume.drone.id}"
     log_group_region       = "${var.aws_region}"
     log_group_drone_server = "${aws_cloudwatch_log_group.drone_server.name}"
     log_group_drone_agent  = "${aws_cloudwatch_log_group.drone_agent.name}"
@@ -108,14 +38,6 @@ resource "aws_ecs_task_definition" "drone" {
 
   cpu    = "512"
   memory = "4096"
-  volume {
-    name = "${aws_ebs_volume.drone.id}"
-
-    # https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_data_volumes.html
-    # Fargate currently supports non-persistent, empty data volumes for containers. When you define your container, you no longer use the host field and only specify a name.
-    # see https://aws.amazon.com/tw/blogs/compute/migrating-your-amazon-ecs-containers-to-aws-fargate/
-    # host_path = "/var/lib/drone"
-  }
 }
 
 resource "aws_ecs_service" "drone" {
@@ -128,7 +50,7 @@ resource "aws_ecs_service" "drone" {
   # iam_role        = "${aws_iam_role.ecs_service.name}"
 
   network_configuration {
-    security_groups  = ["${aws_security_group.ecs_tasks.id}"]
+    security_groups  = ["${aws_security_group.drone_server.id}"]
     subnets          = ["${aws_subnet.drone_a.id}", "${aws_subnet.drone_c.id}"]
     assign_public_ip = true
   }
@@ -162,6 +84,6 @@ resource "aws_ecs_service" "drone" {
   }
   depends_on = [
     # "aws_iam_role_policy.ecs_service",
-    "aws_alb_listener.front_end",
+    "aws_alb_listener.front_end_80",
   ]
 }
