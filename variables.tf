@@ -9,3 +9,7 @@ variable "aws_secret_key" {
 variable "aws_region" {
   description = "aws region."
 }
+
+variable "environment" {
+  default = "staging"
+}

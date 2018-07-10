@@ -1,0 +1,106 @@
+[{
+    "name": "drone-server",
+    "image": "drone/drone:0.8",
+    "cpu": 10,
+    "memory": 256,
+    "portMappings": [{
+      "containerPort": 8000,
+      "protocol": "tcp"
+    }],
+    "entryPoint": [
+      "/bin/drone-server"
+    ],
+    "environment": [
+      {
+        "name": "DRONE_OPEN",
+        "value": "true"
+      },
+      {
+        "name": "DRONE_HOST",
+        "value": "http://127.0.0.1"
+      },
+      {
+        "name": "DRONE_GITHUB",
+        "value": "true"
+      },
+      {
+        "name": "DRONE_GITHUB_CLIENT",
+        "value": "string"
+      },
+      {
+        "name": "DRONE_GITHUB_SECRET",
+        "value": "string"
+      },
+      {
+        "name": "DRONE_SECRET",
+        "value": "123456"
+      },
+      {
+        "name": "DRONE_DATABASE_DRIVER",
+        "value": "mysql"
+      },
+      {
+        "name": "DRONE_DATABASE_DATASOURCE",
+        "value": "root:drone@tcp(127.0.0.1:3306)/drone?parseTime=true"
+      }
+    ],
+    "logConfiguration": {
+      "logDriver": "awslogs",
+      "options": {
+        "awslogs-stream-prefix": "drone",
+        "awslogs-group": "${log_group_drone_server}",
+        "awslogs-region": "${log_group_region}"
+      }
+    }
+  },
+  {
+    "name": "drone-agent",
+    "image": "drone/agent:0.8",
+    "cpu": 10,
+    "memory": 1024,
+    "entryPoint": [
+      "/bin/drone-agent"
+    ],
+    "environment": [
+      {
+        "name": "DRONE_SERVER",
+        "value": "127.0.0.1:9000"
+      },
+      {
+        "name": "DRONE_SECRET",
+        "value": "123456"
+      }
+    ],
+    "logConfiguration": {
+      "logDriver": "awslogs",
+      "options": {
+        "awslogs-stream-prefix": "drone",
+        "awslogs-group": "${log_group_drone_agent}",
+        "awslogs-region": "${log_group_region}"
+      }
+    }
+  },
+  {
+    "name": "mysql",
+    "image": "mysql:5.7.17",
+    "cpu": 10,
+    "memory": 1024,
+    "environment": [{
+        "name": "MYSQL_DATABASE",
+        "value": "drone"
+      },
+      {
+        "name": "MYSQL_ROOT_PASSWORD",
+        "value": "drone"
+      }
+    ],
+    "logConfiguration": {
+      "logDriver": "awslogs",
+      "options": {
+        "awslogs-stream-prefix": "drone",
+        "awslogs-group": "${log_group_drone_db}",
+        "awslogs-region": "${log_group_region}"
+      }
+    }
+  }
+]
