@@ -46,6 +46,9 @@ resource "aws_ecs_service" "drone_server" {
     container_name   = "drone-server"
     container_port   = "8000"
   }
+  service_registries {
+    registry_arn = "${aws_service_discovery_service.drone_server.arn}"
+  }
   depends_on = [
     # "aws_iam_role_policy.ecs_service",
     "aws_alb_listener.front_end_80",

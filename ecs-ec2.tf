@@ -19,7 +19,7 @@ data "aws_ami" "stable_coreos" {
   # see https://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_container_instance.html
   filter {
     name   = "image-id"
-    values = ["ami-f3f8098c"]
+    values = ["ami-5253c32d"]
   }
 }
 

@@ -37,6 +37,16 @@ resource "aws_security_group" "drone_server" {
     ]
   }
 
+  ingress {
+    protocol  = "tcp"
+    from_port = 9000
+    to_port   = 9000
+
+    security_groups = [
+      "${aws_security_group.ec2_sg.id}",
+    ]
+  }
+
   egress {
     from_port = 0
     to_port   = 0

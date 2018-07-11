@@ -4,7 +4,7 @@ data "template_file" "drone_agent_task_definition" {
   vars {
     log_group_region      = "${var.aws_region}"
     log_group_drone_agent = "${aws_cloudwatch_log_group.drone_agent.name}"
-    drone_server          = "${aws_route53_record.drone.fqdn}"
+    drone_server          = "server.drone.local"
   }
 }
 

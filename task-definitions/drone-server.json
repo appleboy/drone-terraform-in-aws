@@ -7,16 +7,19 @@
     "portMappings": [{
       "containerPort": 8000,
       "protocol": "tcp"
+    }, {
+      "containerPort": 9000,
+      "protocol": "tcp"
     }],
     "entryPoint": [
       "/bin/drone-server"
     ],
     "environment": [
       { "name": "DRONE_OPEN", "value": "true" },
-      { "name": "DRONE_HOST", "value": "http://127.0.0.1" },
+      { "name": "DRONE_HOST", "value": "http://localhost" },
       { "name": "DRONE_GITHUB", "value": "true" },
-      { "name": "DRONE_GITHUB_CLIENT", "value": "string" },
-      { "name": "DRONE_GITHUB_SECRET", "value": "string" },
+      { "name": "DRONE_GITHUB_CLIENT", "value": "xxxxxx" },
+      { "name": "DRONE_GITHUB_SECRET", "value": "xxxxxx" },
       { "name": "DRONE_SECRET", "value": "123456" },
       { "name": "DRONE_DATABASE_DRIVER", "value": "mysql" },
       { "name": "DRONE_DATABASE_DATASOURCE", "value": "${db_user}:${db_password}@tcp(${db_name}:3306)/drone?parseTime=true" }
