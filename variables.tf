@@ -48,6 +48,15 @@ variable "instance_class" {
   description = "Instance class"
 }
 
+variable "instance_type" {
+  description = "EC2 Instance Type."
+  default     = "t2.micro"
+}
+
+variable "key_name" {
+  description = "Name of the SSH keypair to use in AWS."
+}
+
 variable "db_name" {
   default     = "drone"
   description = "db name"

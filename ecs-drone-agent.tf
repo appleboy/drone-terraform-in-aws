@@ -11,8 +11,6 @@ data "template_file" "drone_agent_task_definition" {
 resource "aws_ecs_task_definition" "drone_agent" {
   family                = "drone-agent"
   container_definitions = "${data.template_file.drone_agent_task_definition.rendered}"
-  task_role_arn         = "${aws_iam_role.ecs_task.arn}"
-  execution_role_arn    = "${aws_iam_role.ecs_task.arn}"
 
   volume {
     name      = "dockersock"
@@ -20,9 +18,9 @@ resource "aws_ecs_task_definition" "drone_agent" {
   }
 }
 
-resource "aws_ecs_service" "droneci_agent" {
+resource "aws_ecs_service" "drone_agent" {
   name            = "drone-agent"
   cluster         = "${aws_ecs_cluster.drone.id}"
-  desired_count   = "3"
+  desired_count   = 2
   task_definition = "${aws_ecs_task_definition.drone_agent.arn}"
 }

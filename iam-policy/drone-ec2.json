@@ -4,6 +4,7 @@
       "Sid": "ecsInstanceRole",
       "Effect": "Allow",
       "Action": [
+        "ec2:Describe*",
         "ecs:DeregisterContainerInstance",
         "ecs:DiscoverPollEndpoint",
         "ecs:Poll",

@@ -1,0 +1,17 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "allowLoggingToCloudWatch",
+      "Effect": "Allow",
+      "Action": [
+        "logs:CreateLogStream",
+        "logs:PutLogEvents"
+      ],
+      "Resource": [
+        "${server_log_group_arn}",
+        "${agent_log_group_arn}"
+      ]
+    }
+  ]
+}
