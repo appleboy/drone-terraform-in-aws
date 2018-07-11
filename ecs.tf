@@ -23,7 +23,7 @@ resource "aws_ecs_task_definition" "drone" {
   execution_role_arn = "${aws_iam_role.ecs_task.arn}"
 
   cpu    = "512"
-  memory = "4096"
+  memory = "2048"
 }
 
 resource "aws_ecs_service" "drone" {
