@@ -25,7 +25,7 @@ resource "aws_security_group" "web" {
 resource "aws_security_group" "drone_server" {
   description = "controls direct access to application instances"
   vpc_id      = "${aws_vpc.drone.id}"
-  name        = "drone-server-task-lb"
+  name        = "drone-server-task-sg"
 
   ingress {
     protocol  = "tcp"
@@ -45,5 +45,28 @@ resource "aws_security_group" "drone_server" {
     cidr_blocks = [
       "0.0.0.0/0",
     ]
+  }
+}
+
+resource "aws_security_group" "db" {
+  name        = "drone-db-sg"
+  description = "Allow all inbound traffic"
+  vpc_id      = "${aws_vpc.drone.id}"
+
+  ingress {
+    from_port = 3306
+    to_port   = 3306
+    protocol  = "TCP"
+
+    security_groups = [
+      "${aws_security_group.drone_server.id}",
+    ]
+  }
+
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
   }
 }
