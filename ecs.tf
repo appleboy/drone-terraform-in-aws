@@ -2,10 +2,13 @@ resource "aws_ecs_cluster" "drone" {
   name = "drone"
 }
 
-data "template_file" "task_definition" {
+data "template_file" "drone_server_task_definition" {
   template = "${file("${path.module}/task-definitions/service.json")}"
 
   vars {
+    db_name                = "${aws_db_instance.drone.address}"
+    db_user                = "${var.username}"
+    db_password            = "${var.password}"
     log_group_region       = "${var.aws_region}"
     log_group_drone_server = "${aws_cloudwatch_log_group.drone_server.name}"
     log_group_drone_agent  = "${aws_cloudwatch_log_group.drone_agent.name}"
@@ -13,9 +16,9 @@ data "template_file" "task_definition" {
   }
 }
 
-resource "aws_ecs_task_definition" "drone" {
-  family                   = "drone-service"
-  container_definitions    = "${data.template_file.task_definition.rendered}"
+resource "aws_ecs_task_definition" "drone_server" {
+  family                   = "drone-server-service"
+  container_definitions    = "${data.template_file.drone_server_task_definition.rendered}"
   requires_compatibilities = ["FARGATE"]
   network_mode             = "awsvpc"
 
@@ -26,10 +29,10 @@ resource "aws_ecs_task_definition" "drone" {
   memory = "2048"
 }
 
-resource "aws_ecs_service" "drone" {
-  name            = "drone"
+resource "aws_ecs_service" "drone_server" {
+  name            = "drone-server"
   cluster         = "${aws_ecs_cluster.drone.id}"
-  task_definition = "${aws_ecs_task_definition.drone.arn}"
+  task_definition = "${aws_ecs_task_definition.drone_server.arn}"
   desired_count   = 1
   launch_type     = "FARGATE"
 

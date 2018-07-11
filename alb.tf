@@ -4,6 +4,14 @@ resource "aws_alb_target_group" "drone" {
   protocol    = "HTTP"
   vpc_id      = "${aws_vpc.drone.id}"
   target_type = "ip"
+
+  health_check {
+    path                = "/healthz"
+    matcher             = "200"
+    timeout             = "5"
+    healthy_threshold   = "3"
+    unhealthy_threshold = "2"
+  }
 }
 
 resource "aws_alb" "front" {
