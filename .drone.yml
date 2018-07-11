@@ -2,4 +2,4 @@ pipeline:
   backend:
     image: golang:1.10
     commands:
-      - echo "Hello World"
+      - echo "drone server in aws."
