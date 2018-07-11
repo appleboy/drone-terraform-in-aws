@@ -1,0 +1,32 @@
+[{
+    "name": "drone-server",
+    "image": "drone/drone:0.8",
+    "cpu": 10,
+    "memory": 256,
+    "portMappings": [{
+      "containerPort": 8000,
+      "protocol": "tcp"
+    }],
+    "entryPoint": [
+      "/bin/drone-server"
+    ],
+    "environment": [
+      { "name": "DRONE_OPEN", "value": "true" },
+      { "name": "DRONE_HOST", "value": "http://127.0.0.1" },
+      { "name": "DRONE_GITHUB", "value": "true" },
+      { "name": "DRONE_GITHUB_CLIENT", "value": "string" },
+      { "name": "DRONE_GITHUB_SECRET", "value": "string" },
+      { "name": "DRONE_SECRET", "value": "123456" },
+      { "name": "DRONE_DATABASE_DRIVER", "value": "mysql" },
+      { "name": "DRONE_DATABASE_DATASOURCE", "value": "${db_user}:${db_password}@tcp(${db_name}:3306)/drone?parseTime=true" }
+    ],
+    "logConfiguration": {
+      "logDriver": "awslogs",
+      "options": {
+        "awslogs-stream-prefix": "drone",
+        "awslogs-group": "${log_group_drone_server}",
+        "awslogs-region": "${log_group_region}"
+      }
+    }
+  }
+]
