@@ -49,7 +49,6 @@ data "template_file" "ecs_profile" {
   vars {
     server_log_group_arn = "${aws_cloudwatch_log_group.drone_agent.arn}"
     agent_log_group_arn  = "${aws_cloudwatch_log_group.drone_server.arn}"
-    db_log_group_arn     = "${aws_cloudwatch_log_group.drone_db.arn}"
   }
 }
 

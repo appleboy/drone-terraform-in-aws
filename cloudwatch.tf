@@ -5,7 +5,3 @@ resource "aws_cloudwatch_log_group" "drone_server" {
 resource "aws_cloudwatch_log_group" "drone_agent" {
   name = "drone/agent"
 }
-
-resource "aws_cloudwatch_log_group" "drone_db" {
-  name = "drone/db"
-}

@@ -1,4 +1,5 @@
-[{
+[
+  {
     "name": "drone-server",
     "image": "drone/drone:0.8",
     "cpu": 10,

@@ -24,8 +24,7 @@
       ],
       "Resource": [
         "${server_log_group_arn}",
-        "${agent_log_group_arn}",
-        "${db_log_group_arn}"
+        "${agent_log_group_arn}"
       ]
     }
   ]

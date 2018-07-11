@@ -3,7 +3,7 @@ resource "aws_ecs_cluster" "drone" {
 }
 
 data "template_file" "drone_server_task_definition" {
-  template = "${file("${path.module}/task-definitions/service.json")}"
+  template = "${file("${path.module}/task-definitions/drone-server.json")}"
 
   vars {
     db_name                = "${aws_db_instance.drone.address}"
@@ -11,13 +11,11 @@ data "template_file" "drone_server_task_definition" {
     db_password            = "${var.password}"
     log_group_region       = "${var.aws_region}"
     log_group_drone_server = "${aws_cloudwatch_log_group.drone_server.name}"
-    log_group_drone_agent  = "${aws_cloudwatch_log_group.drone_agent.name}"
-    log_group_drone_db     = "${aws_cloudwatch_log_group.drone_db.name}"
   }
 }
 
 resource "aws_ecs_task_definition" "drone_server" {
-  family                   = "drone-server-service"
+  family                   = "drone-server"
   container_definitions    = "${data.template_file.drone_server_task_definition.rendered}"
   requires_compatibilities = ["FARGATE"]
   network_mode             = "awsvpc"
