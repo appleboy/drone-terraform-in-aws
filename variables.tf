@@ -70,3 +70,30 @@ variable "username" {
 variable "password" {
   description = "password, provide through your ENV variables"
 }
+
+variable "amis" {
+  type = "map"
+
+  #
+  # Launching an Amazon ECS Container Instance
+  # https://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_container_instance.html
+  #
+  default = {
+    us-east-2      = "ami-956e52f0"
+    us-east-1      = "ami-5253c32d"
+    us-west-2      = "ami-d2f489aa"
+    us-west-1      = "ami-6b81980b"
+    eu-west-2      = "ami-3622cf51"
+    eu-west-3      = "ami-ca75c4b7"
+    eu-west-1      = "ami-c91624b0"
+    eu-central-    = "ami-10e6c8fb"
+    ap-northeast-2 = "ami-7c69c112"
+    ap-northeast-1 = "ami-f3f8098c"
+    ap-southeast-2 = "ami-bc04d5de"
+    ap-southeast-1 = "ami-b75a6acb"
+    ca-central-1   = "ami-da6cecbe"
+    ap-south-1     = "ami-c7072aa8"
+    sa-east-1      = "ami-a1e2becd"
+    us-gov-west-1  = "ami-03920462"
+  }
+}
