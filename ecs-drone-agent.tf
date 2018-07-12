@@ -5,6 +5,10 @@ data "template_file" "drone_agent_task_definition" {
     log_group_region      = "${var.aws_region}"
     log_group_drone_agent = "${aws_cloudwatch_log_group.drone_agent.name}"
     drone_server          = "server.drone.local"
+    drone_secret          = "${var.drone_secret}"
+    drone_version         = "${var.drone_version}"
+    container_cpu         = "${var.container_cpu}"
+    container_memory      = "${var.container_memory}"
   }
 }
 

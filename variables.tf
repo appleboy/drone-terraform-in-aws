@@ -97,3 +97,51 @@ variable "amis" {
     us-gov-west-1  = "ami-03920462"
   }
 }
+
+variable "alb_port" {
+  description = "ALB frond end port"
+  default     = "80"
+}
+
+variable "task_cpu" {
+  description = "cpu usage of ecs task"
+  default     = "512"
+}
+
+variable "task_memory" {
+  description = "memory usage of ecs task"
+  default     = "1024"
+}
+
+variable "container_cpu" {
+  description = "cpu usage of ecs container"
+  default     = "128"
+}
+
+variable "container_memory" {
+  description = "memory usage of ecs container"
+  default     = "512"
+}
+
+variable "agent_port" {
+  description = "drone agent comunicate port."
+  default     = "9000"
+}
+
+variable "drone_github_client" {
+  description = "drone github client."
+}
+
+variable "drone_github_secret" {
+  description = "drone github secret."
+}
+
+variable "drone_secret" {
+  description = "drone secret."
+  default     = "1234567890"
+}
+
+variable "drone_version" {
+  description = "drone version."
+  default     = "0.8"
+}

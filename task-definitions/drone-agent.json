@@ -1,15 +1,15 @@
 [
   {
     "name": "drone-agent",
-    "image": "drone/agent:0.8",
-    "cpu": 10,
-    "memory": 512,
+    "image": "drone/agent:${drone_version}",
+    "cpu": ${container_cpu},
+    "memory": ${container_memory},
     "entryPoint": [
       "/bin/drone-agent"
     ],
     "environment": [
       { "name": "DRONE_SERVER", "value": "${drone_server}:9000" },
-      { "name": "DRONE_SECRET", "value": "123456" }
+      { "name": "DRONE_SECRET", "value": "${drone_secret}" }
     ],
     "mountPoints": [{
       "sourceVolume": "dockersock",

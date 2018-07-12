@@ -9,8 +9,15 @@ data "template_file" "drone_server_task_definition" {
     db_name                = "${aws_db_instance.drone.address}"
     db_user                = "${var.username}"
     db_password            = "${var.password}"
+    container_cpu          = "${var.container_cpu}"
+    container_memory       = "${var.container_memory}"
     log_group_region       = "${var.aws_region}"
     log_group_drone_server = "${aws_cloudwatch_log_group.drone_server.name}"
+    drone_host             = "${aws_alb.front.dns_name}"
+    drone_github_client    = "${var.drone_github_client}"
+    drone_github_secret    = "${var.drone_github_secret}"
+    drone_secret           = "${var.drone_secret}"
+    drone_version          = "${var.drone_version}"
   }
 }
 
@@ -23,8 +30,8 @@ resource "aws_ecs_task_definition" "drone_server" {
   task_role_arn      = "${aws_iam_role.ecs_task.arn}"
   execution_role_arn = "${aws_iam_role.ecs_task.arn}"
 
-  cpu    = "512"
-  memory = "2048"
+  cpu    = "${var.task_cpu}"
+  memory = "${var.task_memory}"
 }
 
 resource "aws_ecs_service" "drone_server" {

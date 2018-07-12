@@ -1,9 +1,9 @@
 [
   {
     "name": "drone-server",
-    "image": "drone/drone:0.8",
-    "cpu": 10,
-    "memory": 256,
+    "image": "drone/drone:${drone_version}",
+    "cpu": ${container_cpu},
+    "memory": ${container_memory},
     "portMappings": [{
       "containerPort": 8000,
       "protocol": "tcp"
@@ -16,11 +16,11 @@
     ],
     "environment": [
       { "name": "DRONE_OPEN", "value": "true" },
-      { "name": "DRONE_HOST", "value": "http://localhost" },
+      { "name": "DRONE_HOST", "value": "http://${drone_host}" },
       { "name": "DRONE_GITHUB", "value": "true" },
-      { "name": "DRONE_GITHUB_CLIENT", "value": "xxxxxx" },
-      { "name": "DRONE_GITHUB_SECRET", "value": "xxxxxx" },
-      { "name": "DRONE_SECRET", "value": "123456" },
+      { "name": "DRONE_GITHUB_CLIENT", "value": "${drone_github_client}" },
+      { "name": "DRONE_GITHUB_SECRET", "value": "${drone_github_secret}" },
+      { "name": "DRONE_SECRET", "value": "${drone_secret}" },
       { "name": "DRONE_DATABASE_DRIVER", "value": "mysql" },
       { "name": "DRONE_DATABASE_DATASOURCE", "value": "${db_user}:${db_password}@tcp(${db_name}:3306)/drone?parseTime=true" }
     ],
