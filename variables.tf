@@ -123,7 +123,12 @@ variable "container_memory" {
   default     = "512"
 }
 
-variable "agent_port" {
+variable "drone_server_port" {
+  description = "drone server port."
+  default     = "8000"
+}
+
+variable "drone_agent_port" {
   description = "drone agent comunicate port."
   default     = "9000"
 }

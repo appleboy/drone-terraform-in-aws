@@ -5,10 +5,10 @@
     "cpu": ${container_cpu},
     "memory": ${container_memory},
     "portMappings": [{
-      "containerPort": 8000,
+      "containerPort": ${drone_server_port},
       "protocol": "tcp"
     }, {
-      "containerPort": 9000,
+      "containerPort": ${drone_agent_port},
       "protocol": "tcp"
     }],
     "entryPoint": [

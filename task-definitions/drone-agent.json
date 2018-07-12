@@ -8,7 +8,7 @@
       "/bin/drone-agent"
     ],
     "environment": [
-      { "name": "DRONE_SERVER", "value": "${drone_server}:9000" },
+      { "name": "DRONE_SERVER", "value": "${drone_server}:${drone_agent_port}" },
       { "name": "DRONE_SECRET", "value": "${drone_secret}" }
     ],
     "mountPoints": [{

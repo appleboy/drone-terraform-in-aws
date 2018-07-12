@@ -29,8 +29,8 @@ resource "aws_security_group" "drone_server" {
 
   ingress {
     protocol  = "tcp"
-    from_port = 8000
-    to_port   = 8000
+    from_port = "${var.drone_server_port}"
+    to_port   = "${var.drone_server_port}"
 
     security_groups = [
       "${aws_security_group.web.id}",
@@ -39,8 +39,8 @@ resource "aws_security_group" "drone_server" {
 
   ingress {
     protocol  = "tcp"
-    from_port = 9000
-    to_port   = 9000
+    from_port = "${var.drone_agent_port}"
+    to_port   = "${var.drone_agent_port}"
 
     security_groups = [
       "${aws_security_group.ec2_sg.id}",

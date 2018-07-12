@@ -7,6 +7,7 @@ data "template_file" "drone_agent_task_definition" {
     drone_server          = "server.drone.local"
     drone_secret          = "${var.drone_secret}"
     drone_version         = "${var.drone_version}"
+    drone_agent_port      = "${var.drone_agent_port}"
     container_cpu         = "${var.container_cpu}"
     container_memory      = "${var.container_memory}"
   }
