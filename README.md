@@ -30,3 +30,9 @@ See [AWSService Discovery][2] to get more detail information. So you can only cr
 [1]:https://docs.aws.amazon.com/AmazonECS/latest/developerguide/AWS_Fargate.html
 [2]:https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-discovery.html
 [3]:https://www.terraform.io/
+
+## How to testing
+
+```sh
+$ go test -timeout 30m -v .
+```
