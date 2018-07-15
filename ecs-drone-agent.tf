@@ -26,6 +26,6 @@ resource "aws_ecs_task_definition" "drone_agent" {
 resource "aws_ecs_service" "drone_agent" {
   name            = "drone-agent"
   cluster         = "${aws_ecs_cluster.drone.id}"
-  desired_count   = 2
+  desired_count   = "${var.drone_desired_count_agent}"
   task_definition = "${aws_ecs_task_definition.drone_agent.arn}"
 }

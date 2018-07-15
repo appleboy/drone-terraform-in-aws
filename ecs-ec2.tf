@@ -3,7 +3,7 @@ resource "aws_autoscaling_group" "drone_agent" {
   vpc_zone_identifier  = ["${aws_subnet.drone_a.id}", "${aws_subnet.drone_c.id}"]
   min_size             = "1"
   max_size             = "3"
-  desired_capacity     = "2"
+  desired_capacity     = "${var.drone_desired_count_agent}"
   launch_configuration = "${aws_launch_configuration.app.name}"
 }
 

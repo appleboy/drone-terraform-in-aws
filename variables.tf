@@ -150,3 +150,8 @@ variable "drone_version" {
   description = "drone version."
   default     = "0.8"
 }
+
+variable "drone_desired_count_agent" {
+  description = "drone agent desired."
+  default     = "2"
+}
