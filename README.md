@@ -14,6 +14,8 @@ AWS Fargate with Amazon ECS is currently only available in the following regions
 |US West (Oregon)	|us-west-2|
 |EU West (Ireland)	|eu-west-1|
 |Asia Pacific (Tokyo)	|ap-northeast-1|
+|Asia Pacific (Singapore)	|ap-southeast-1|
+|Asia Pacific (Sydney)	|ap-southeast-2|
 
 See [AWS Fargate on Amazon ECS][1] to get more detail information. Service discovery is available in the following AWS Regions:
 
