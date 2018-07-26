@@ -53,10 +53,6 @@ variable "instance_type" {
   default     = "t2.micro"
 }
 
-variable "key_name" {
-  description = "Name of the SSH keypair to use in AWS."
-}
-
 variable "db_name" {
   default     = "drone"
   description = "db name"
