@@ -7,6 +7,11 @@ resource "aws_db_subnet_group" "db" {
   }
 }
 
+resource "random_string" "db_password" {
+  special = false
+  length  = 20
+}
+
 resource "aws_db_instance" "drone" {
   depends_on                = ["aws_security_group.db"]
   identifier                = "${var.identifier}"
@@ -16,7 +21,7 @@ resource "aws_db_instance" "drone" {
   instance_class            = "${var.instance_class}"
   name                      = "${var.db_name}"
   username                  = "${var.username}"
-  password                  = "${var.password}"
+  password                  = "${random_string.db_password.result}"
   vpc_security_group_ids    = ["${aws_security_group.db.id}"]
   db_subnet_group_name      = "${aws_db_subnet_group.db.id}"
   skip_final_snapshot       = true

@@ -64,11 +64,7 @@ variable "db_name" {
 
 variable "username" {
   default     = "drone"
-  description = "User name"
-}
-
-variable "password" {
-  description = "password, provide through your ENV variables"
+  description = "database user name"
 }
 
 variable "amis" {

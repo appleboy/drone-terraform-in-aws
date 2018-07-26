@@ -8,7 +8,7 @@ data "template_file" "drone_server_task_definition" {
   vars {
     db_name                = "${aws_db_instance.drone.address}"
     db_user                = "${var.username}"
-    db_password            = "${var.password}"
+    db_password            = "${random_string.db_password.result}"
     container_cpu          = "${var.container_cpu}"
     container_memory       = "${var.container_memory}"
     log_group_region       = "${var.aws_region}"
