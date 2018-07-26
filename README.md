@@ -33,6 +33,46 @@ See [AWS Service Discovery][2] to get more detail information. So you can only c
 [2]:https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-discovery.html
 [3]:https://www.terraform.io/
 
+## Configuration
+
+create new file with `terraform.tfvars` filename and put the following variable:
+
+```
+aws_access_key = "xxx"
+aws_secret_key = "xxx"
+drone_github_client = "xxxx"
+drone_github_secret = "xxxx"
+ssh_public_key = "ssh-rsa xxxxxx appleboy@xxxx"
+```
+
+## Build Infrastructure
+
+
+The first command to run for a new configuration
+
+```
+$ terraform init
+Initializing the backend...
+Initializing provider plugins...
+- downloading plugin for provider "aws"...
+```
+
+Apply Changes
+
+```
+$ terraform apply
+```
+
+You will see the output:
+
+```
+Outputs:
+
+alb_hostname = http://drone-front-alb-xxxxxxx.us-east-1.elb.amazonaws.com
+database_root_password = <sensitive>
+region = us-east-1
+```
+
 ## How to testing
 
 ```sh
