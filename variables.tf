@@ -151,3 +151,7 @@ variable "drone_desired_count_agent" {
   description = "drone agent desired."
   default     = "2"
 }
+
+variable "ssh_public_key" {
+  description = "The public key material. SSH public key file format as specified in RFC4716"
+}

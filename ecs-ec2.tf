@@ -22,12 +22,17 @@ data "aws_ami" "stable_coreos" {
   }
 }
 
+resource "aws_key_pair" "drone" {
+  key_name_prefix = "drone"
+  public_key      = "${var.ssh_public_key}"
+}
+
 resource "aws_launch_configuration" "app" {
   security_groups = [
     "${aws_security_group.ec2_sg.id}",
   ]
 
-  key_name                    = "${var.key_name}"
+  key_name                    = "${aws_key_pair.drone.key_name}"
   image_id                    = "${data.aws_ami.stable_coreos.id}"
   instance_type               = "${var.instance_type}"
   iam_instance_profile        = "${aws_iam_instance_profile.drone.name}"
