@@ -33,7 +33,7 @@ See [AWS Fargate on Amazon ECS][1] to get more detail information. Service disco
 | EU \(Ireland\) | eu\-west\-1 | 
 | EU \(London\) | eu\-west\-2 | 
 
-See [AWS Service Discovery][2] to get more detail information. So you can only create the drone infrastructure in `us-east-1`, `us-east-2`, `us-west-2` or `eu-west-1` region using [Terraform][3]. Before you begin, make sure you've read the limition.
+See [AWS Service Discovery][2] to get more detail information. Before you begin, make sure you've read the limition.
 
 [1]:https://docs.aws.amazon.com/AmazonECS/latest/developerguide/AWS_Fargate.html
 [2]:https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-discovery.html
