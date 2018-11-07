@@ -1,5 +1,7 @@
 # drone-terraform
 
+<img src="./screenshot/aws.png">
+
 [Drone](https://github.com/drone/drone) CI/CD infrastructure using [Terraform][3] in [AWS](https://aws.amazon.com).
 
 ## Requirement
