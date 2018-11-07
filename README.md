@@ -15,6 +15,7 @@ AWS Fargate with Amazon ECS is currently only available in the following regions
 | US East \(Ohio\) | us\-east\-2 | 
 | US West \(Oregon\) | us\-west\-2 | 
 | EU \(Ireland\) | eu\-west\-1 | 
+| EU \(London\) | eu\-west\-2 | 
 | EU \(Frankfurt\) | eu\-central\-1 | 
 | Asia Pacific \(Tokyo\) | ap\-northeast\-1 | 
 | Asia Pacific \(Singapore\) | ap\-southeast\-1 | 
@@ -28,12 +29,17 @@ See [AWS Fargate on Amazon ECS][1] to get more detail information. Service disco
 | US East \(Ohio\) | us\-east\-2 | 
 | US West \(N\. California\) | us\-west\-1 | 
 | US West \(Oregon\) | us\-west\-2 | 
+| Asia Pacific \(Mumbai\) | ap\-south\-1 | 
+| Asia Pacific \(Seoul\) | ap\-northeast\-2 | 
 | Asia Pacific \(Singapore\) | ap\-southeast\-1 | 
 | Asia Pacific \(Sydney\) | ap\-southeast\-2 | 
 | Asia Pacific \(Tokyo\) | ap\-northeast\-1 | 
 | EU \(Frankfurt\) | eu\-central\-1 | 
 | EU \(Ireland\) | eu\-west\-1 | 
 | EU \(London\) | eu\-west\-2 | 
+| EU \(Paris\) | eu\-west\-3 | 
+| South America \(São Paulo\) | sa\-east\-1 | 
+| Canada \(Central\) | ca\-central\-1 | 
 
 See [AWS Service Discovery][2] to get more detail information. Before you begin, make sure you've read the limition.
 
